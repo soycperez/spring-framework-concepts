@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context 
+    http://www.springframework.org/schema/context/spring-context.xsd">
+    
+    <!-- Notar que es parecido a ConfigE2.class
+    	Primero creamos el @Bean -> <bean/> para crear el objeto.
+    	*El atributo id="" recordar que es el nombre de la clase con la letra
+    	inicial en minuscula.
+    	*El atributo class="" hace referencia al paquete y clase que creremos el Bean
+     -->
+    <bean id="messageServiceE2" class="com.spring.framework.bean.MessageServiceE2"/>
+    
+    <!-- Realizamos la Inyección de dependencias. 
+    	*Creamos el @Bean -> <bean> para realizar la inyección de dependencias. 
+    	Recordar que messageManagerE2 tiene atributos de tipo MessageServiceE2 messageService1;
+    	*La inyección se hara a trabes del metodo set, entonces se usa la etiqueta <property>.
+    	Donde el atributo name="" es el bean del servicio y ref="" es el metodo setMessageService2,
+    	Spring hace la inyeccion eliminando el "set" y utiliazando la primer letra por minuscula "M"-> m
+    	Entonces queda: setMessageService2 -> messageServiceE2     
+     -->
+    <bean id="messageManagerE2" class="com.spring.framework.bean.MessageManagerE2">
+    	<property name="messageService1" ref="messageServiceE2"></property>
+    	<property name="messageService2" ref="messageServiceE2"></property>
+    </bean>
+    
+
+</beans>
